@@ -1,4 +1,4 @@
-# Multi-stage build for CI — builds Next.js standalone then creates lean runtime image
+# Multi-stage build for CI
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -15,7 +15,6 @@ ENV HOSTNAME=0.0.0.0
 RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-RUN mkdir -p ./public
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 USER nextjs
 EXPOSE 3001
