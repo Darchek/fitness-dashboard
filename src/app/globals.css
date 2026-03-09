@@ -1,27 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary:    #09090f;
+  --bg-secondary:  #0f0f18;
+  --bg-card:       #14141e;
+  --bg-hover:      #1c1c28;
+  --border:        #272736;
+  --border-subtle: #1e1e2c;
+  --text-primary:  #eeeef8;
+  --text-secondary:#9090b0;
+  --text-muted:    #505068;
+  --blue:   #4f8ef7;
+  --purple: #a855f7;
+  --green:  #22d3a4;
+  --orange: #fb923c;
+  --red:    #f87171;
+  --amber:  #fbbf24;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a50; }
+
+/* Form inputs */
+.fit-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
 }
+.fit-input:focus { border-color: var(--blue); }
+.fit-input::placeholder { color: var(--text-muted); }
+.fit-input option { background: var(--bg-secondary); }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.35s ease-out forwards; }
+.delay-1 { animation-delay: 0.05s; opacity: 0; }
+.delay-2 { animation-delay: 0.10s; opacity: 0; }
+.delay-3 { animation-delay: 0.15s; opacity: 0; }
+.delay-4 { animation-delay: 0.20s; opacity: 0; }
+.delay-5 { animation-delay: 0.25s; opacity: 0; }
+
+/* Recharts grid lines */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line { stroke: #272736 !important; }
+
+/* react-calendar */
+.react-calendar { background: transparent !important; border: none !important; width: 100% !important; color: var(--text-primary) !important; font-family: 'Inter', sans-serif !important; }
+.react-calendar__navigation { margin-bottom: 1rem !important; }
+.react-calendar__navigation button { color: var(--text-primary) !important; background: transparent !important; font-size: 1.05rem !important; font-weight: 600 !important; min-width: 44px !important; border-radius: 10px !important; padding: 0.5rem !important; }
+.react-calendar__navigation button:hover { background: var(--bg-hover) !important; }
+.react-calendar__month-view__weekdays { text-align: center; color: var(--text-muted) !important; font-size: 0.72rem !important; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem !important; }
+.react-calendar__month-view__weekdays__weekday abbr { text-decoration: none !important; }
+.react-calendar__tile { background: transparent !important; color: var(--text-secondary) !important; border-radius: 12px !important; padding: 0.85em 0.4em 1em !important; font-size: 0.95rem !important; transition: all 0.15s ease !important; position: relative !important; min-height: 56px !important; }
+.react-calendar__tile:hover { background: var(--bg-hover) !important; color: var(--text-primary) !important; }
+.react-calendar__tile--active { background: var(--blue) !important; color: white !important; }
+.react-calendar__tile--now:not(.react-calendar__tile--active) { color: var(--blue) !important; font-weight: 700 !important; }

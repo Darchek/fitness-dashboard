@@ -34,3 +34,39 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ─── Secrets & Sensitive Files ───────────────────────────────────────────────
+# All .env variants
+.env
+.env.*
+*.env
+!*.env.example
+!*.env.sample
+
+# Keys & certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+id_rsa
+id_ed25519
+id_dsa
+id_ecdsa
+
+# Credentials & secrets
+secrets.*
+credentials.*
+*credentials*.json
+*service-account*.json
+*serviceaccount*.json
+*.secret
+config/secrets*
+secrets/
+.secrets/
+
+# Tokens & API keys
+*.token
+# ─────────────────────────────────────────────────────────────────────────────
