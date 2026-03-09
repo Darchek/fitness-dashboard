@@ -51,6 +51,7 @@ pipeline {
                             git pull origin main
                             /usr/local/bin/docker build -f Dockerfile.ci -t fitness-dashboard:latest .
                             cd /Users/mbusq/deployments/fitness
+                            /usr/local/bin/docker rm -f fitness-dashboard || true
                             /usr/local/bin/docker compose up -d --force-recreate fitness-dashboard
                             /usr/local/bin/docker image prune -f
                             echo "fitness-dashboard deploy complete"
