@@ -7,7 +7,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://192.168.1.220:18110/:path*',
+        destination: 'http://fitness-api:8000/:path*',
       },
     ];
   },
