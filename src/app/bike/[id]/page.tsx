@@ -110,7 +110,7 @@ export default function BikeSessionPage() {
 
   const stats = [
     { l:'Distance',    v:`${parseFloat(data.distance_km||0).toFixed(2)} km`, c:COLORS.distance },
-    { l:'Duration',    v:data.duration_min ? `${data.duration_min} min` : '—', c:'var(--text-secondary)' },
+    { l:'Duration',    v:data.duration_min ? `${Math.floor(data.duration_min)}:${String(Math.round((data.duration_min % 1) * 60)).padStart(2, '0')} min` : '—', c:'var(--text-secondary)' },
     { l:'Avg Speed',   v:data.avg_speed_kmh ? `${parseFloat(data.avg_speed_kmh).toFixed(1)} km/h` : '—', c:COLORS.speed },
     { l:'Max Speed',   v:max('speed') > 0 ? `${max('speed').toFixed(1)} km/h` : '—', c:COLORS.speed },
     { l:'Avg Cadence', v:avg('cadence') > 0 ? `${avg('cadence').toFixed(0)} rpm` : '—', c:COLORS.cadence },
