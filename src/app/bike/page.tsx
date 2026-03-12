@@ -135,7 +135,13 @@ export default function BikePage() {
                       {new Date(w.workout_date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
                     </td>
                     <td className="py-3 pr-4 font-semibold" style={{ color:GREEN }}>{parseFloat(w.distance_km||0).toFixed(1)} km</td>
-                    <td className="py-3 pr-4" style={{ color:'var(--text-secondary)' }}>{w.duration_min ? `${w.duration_min} min` : '—'}</td>
+                    <td className="py-3 pr-4" style={{ color:'var(--text-secondary)' }}>
+                      {w.duration_min
+                        ? `${Math.floor(w.duration_min)}:${Math.round((w.duration_min % 1) * 60)
+                            .toString()
+                            .padStart(2, '0')}`
+                        : '—'}
+                    </td>
                     <td className="py-3 pr-4" style={{ color:'var(--text-secondary)' }}>{w.avg_speed_kmh ? `${parseFloat(w.avg_speed_kmh).toFixed(1)} km/h` : '—'}</td>
                     <td className="py-3 pr-4" style={{ color:'var(--text-secondary)' }}>{parseFloat(w.max_speed||0) > 0 ? `${parseFloat(w.max_speed).toFixed(1)} km/h` : '—'}</td>
                     <td className="py-3 pr-4" style={{ color:'var(--text-secondary)' }}>{parseFloat(w.avg_cadence||0) > 0 ? `${parseFloat(w.avg_cadence).toFixed(0)} rpm` : '—'}</td>
