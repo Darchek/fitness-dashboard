@@ -17,14 +17,16 @@ const localDateStr = (date: Date) => {
 const DOT_COLORS: Record<string, string> = {
   cardio:   '#4f8ef7',
   strength: '#a855f7',
-  weight:   '#f97316',
+  weight_kg:   '#f97316',
+  body_fat:   '#f97316',
   alcohol:  '#ef4444',
 };
 
 const DOT_LABELS: Record<string, string> = {
   cardio:   'Cardio',
   strength: 'Strength',
-  weight:   'Weight',
+  weight_kg:   'Weight',
+  body_fat:   'Body fat',
   alcohol:  'Alcohol',
 };
 
@@ -57,7 +59,7 @@ export default function CalendarPage() {
     setDayData([
       ...cr.map((w:any) => ({ ...w, activity: w.type,     category: 'cardio',   date: w.workout_date })),
       ...sr.map((w:any) => ({ ...w, activity: w.exercise, category: 'strength', date: w.workout_date })),
-      ...wr.map((w:any) => ({ ...w, activity: 'weight',   category: 'weight',   date: w.measured_at  })),
+      ...wr.map((w:any) => ({ ...w, activity: 'weight',   category: w.event_name,   date: w.measured_at  })),
       ...hr.map((w:any) => ({ ...w, activity: w.habit,    category: 'alcohol',  date: w.event_date   })),
     ].sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
     setLoading(false);
@@ -120,13 +122,15 @@ export default function CalendarPage() {
                   style={{ background:'var(--bg-secondary)' }}>
                   <div className="flex items-center gap-3 mb-2">
                     <span className="text-xl">
-                      {w.category === 'weight'  ? '⚖️' :
+                      {w.category === 'weight_kg'  ? '⚖️' :
+                       w.category === 'body_fat'  ? '🍔' :
                        w.category === 'alcohol' ? '🍺' :
                        EMOJI[w.activity] || '🏋️'}
                     </span>
                     <div className="flex-1">
                       <div className="font-medium text-sm capitalize">
-                        {w.category === 'weight'  ? `Weight: ${parseFloat(w.weight_kg).toFixed(1)} kg` :
+                        {w.category === 'weight_kg'  ? `Weight: ${parseFloat(w.value).toFixed(1)} kg` :
+                         w.category === 'body_fat'  ? `Body fat: ${parseFloat(w.value).toFixed(1)} kg` :
                          w.category === 'alcohol' ? 'Alcohol consumed' :
                          w.activity}
                       </div>
@@ -137,7 +141,7 @@ export default function CalendarPage() {
                     <span className="text-xs px-2 py-0.5 rounded-lg" style={{
                       background: `${DOT_COLORS[w.category]}22`,
                       color:       DOT_COLORS[w.category],
-                    }}>{w.category}</span>
+                    }}>{DOT_LABELS[w.category]}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-1.5 text-xs" style={{ color:'var(--text-secondary)' }}>
                     {w.distance_km && <div>📍 {parseFloat(w.distance_km).toFixed(1)} km</div>}

@@ -8,6 +8,7 @@ const nextConfig = {
       {
         source: '/api/:path*',
         destination: 'http://fitness-api:8000/:path*',
+        // destination: 'https://fitness.martibusquets.cat/api/:path*',
       },
     ];
   },
