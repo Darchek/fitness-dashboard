@@ -42,6 +42,35 @@ export default function LoginModal() {
     }
   };
 
+
+return (
+  <div
+    className="fixed inset-0 z-[60] flex items-center justify-center"
+    style={{ background: 'rgba(0,0,0,0.88)', backdropFilter: 'blur(10px)' }}
+  >
+    <div
+      className="flex flex-col items-center justify-center p-12 rounded-2xl fade-up"
+      style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
+    >
+      {/* Loading Spinner */}
+      <div className="relative w-12 h-12">
+        <div 
+          className="absolute inset-0 rounded-full border-4 border-t-transparent animate-spin"
+          style={{ 
+            borderColor: 'rgba(79, 142, 247, 0.2)', 
+            borderTopColor: '#7c3aed' 
+          }}
+        ></div>
+      </div>
+      
+      {/* Optional: Add a small label if you want the user to know what's happening */}
+      <p className="mt-4 text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+        Loading...
+      </p>
+    </div>
+  </div>
+);
+
   return (
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center"

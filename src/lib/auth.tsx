@@ -24,11 +24,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('fit-user');
-      if (stored) setUser(JSON.parse(stored));
+      loginAuthentik();
     } catch {}
     setLoaded(true);
   }, []);
+
+  const loginAuthentik = ()=> {
+    fetch('/api/auth/me').then(r=>r.json()).then((user) => {
+      if (user) {
+        const fit_user = { username: user.username, role: user?.groups?.length > 0 ? user?.groups[0] : 'user' };
+        setUser(fit_user);
+        localStorage.setItem('fit-user', JSON.stringify(fit_user));
+      }
+    });
+  }
 
   const login = (u: User) => {
     setUser(u);
