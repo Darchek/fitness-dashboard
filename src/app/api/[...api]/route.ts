@@ -3,9 +3,7 @@ import { NextRequest } from 'next/server';
 
 const BACKEND_URL = 'http://fitness-api:8000';
 
-async function proxyRequest(req: NextRequest, params: { api: string[] }) {
-  console.log(params.api);
-    
+async function proxyRequest(req: NextRequest, params: { api: string[] }) {   
   const path = params.api.join('/');
   const url = `${BACKEND_URL}/${path}${req.nextUrl.search}`;
 
@@ -35,22 +33,22 @@ async function proxyRequest(req: NextRequest, params: { api: string[] }) {
   });
 }
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ api: string[] }> }) {
   return proxyRequest(req, await params);
 }
 
-export async function POST(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ api: string[] }> }) {
   return proxyRequest(req, await params);
 }
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ api: string[] }> }) {
   return proxyRequest(req, await params);
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ api: string[] }> }) {
   return proxyRequest(req, await params);
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ api: string[] }> }) {
   return proxyRequest(req, await params);
 }
