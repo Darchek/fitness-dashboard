@@ -10,6 +10,7 @@ const nav = [
   { href: '/bike',      label: 'Bike',      icon: '🚴' },
   { href: '/cardio',    label: 'Cardio',    icon: '🏃' },
   { href: '/strength',  label: 'Strength',  icon: '💪' },
+  { href: '/plan',      label: 'Plan',      icon: '📋' },
 ];
 
 export default function Sidebar() {
